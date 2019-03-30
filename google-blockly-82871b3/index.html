@@ -1,0 +1,50 @@
+<script src="blockly_compressed.js"></script>
+<script src="blocks_compressed.js"></script>
+
+<script src="msg/js/en.js"></script>
+
+
+<div id="blocklyDiv" style="height: 480px; width: 600px"></div>
+
+<xml id="toolbox" style="display: none">
+<!--
+  <block type="controls_if"></block>
+  <block type="controls_repeat_ext"></block>
+  <block type="logic_compare"></block>
+  <block type="math_number"></block>
+  <block type="math_arithmetic"></block>
+  <block type="text"></block>
+  <block type="text_print"></block>
+
+-->
+
+	<category name="TestCategory">
+		<block type=""></block>
+	</category>
+	
+</xml>
+
+<script>
+	var workspace = Blockly.inject('blocklyDiv',
+		{toolbox: document.getElementById('toolbox')});
+	Blockly.Blocks['string_length'] = {
+		 iinit: function() {
+		    this.jsonInit({
+		      "message0": 'length of %1',
+		      "args0": [
+			{
+			  "type": "input_value",
+			  "name": "VALUE",
+			  "check": "String"
+			}
+		      ],
+		      "output": "Number",
+		      "colour": 160,
+		      "tooltip": "Returns number of letters in the provided text.",
+		      "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp"
+		    });
+		  }
+		};
+
+</script>
+
