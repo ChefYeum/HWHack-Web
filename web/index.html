@@ -11,10 +11,10 @@
 
 		<a id="downloadAnchorElem" style="display:none"></a>
 
-
-		<div id="blocklyDiv" style="height: 480px; width: 600px"></div>
-
-		<button onclick="download()">Download</button>
+		<center>
+		<div id="blocklyDiv" style="height: 768px; width: 1024px"></div>
+		<button onclick="download()" style="height: 80px; width: 400px">Download</button>
+		</center>
 
 
 		<xml id="toolbox" style="display: none">
@@ -44,8 +44,11 @@
 					var currentBlock = blocks[i];
 					blockFeats.type = currentBlock.type;
 					blockFeats.args = [];
-					for (var j = 0; j < currentBlock.inputList.length; j++){
-						blockFeats.args.push(currentBlock.inputList[j].fieldRow[1].text_);
+					for (var j = 0; j < currentBlock.inputList[0].fieldRow.length; j++){
+						currentField = currentBlock.inputList[0].fieldRow[j];
+						if ((currentField.name != undefined)){
+							blockFeats.args.push(currentField.text_);
+						}
 					}
 					output.push(blockFeats);
 				}
