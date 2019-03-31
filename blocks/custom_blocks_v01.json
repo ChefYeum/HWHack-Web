@@ -1,6 +1,6 @@
 [{
   "type": "gui_click",
-  "message0": "Click %1 %2",
+  "message0": "mouse click %1 %2",
   "args0": [
     {
       "type": "input_dummy"
@@ -33,7 +33,8 @@
 },
 {
   "type": "gui_moveto",
-  "message0": "Move cursor to %1 x %2 y %3 duration in secs %4",
+  "lastDummyAlign0": "RIGHT",
+  "message0": "move cursor to %1 x postion %2 y position %3 over %4 seconds",
   "args0": [
     {
       "type": "input_dummy"
@@ -41,20 +42,22 @@
     {
       "type": "input_value",
       "name": "x_pos",
-      "check": "Number"
+      "check": "Number",
+      "align": "RIGHT"
     },
     {
       "type": "input_value",
       "name": "y_pos",
-      "check": "Number"
+      "check": "Number",
+      "align": "RIGHT"
     },
     {
-      "type": "input_value",
-      "name": "duration_secs",
-      "check": "Number"
+      "type": "field_number",
+      "name": "time_duration",
+      "value": 0
     }
   ],
-  "inputsInline": true,
+  "inputsInline": false,
   "previousStatement": null,
   "nextStatement": null,
   "colour": 210,
@@ -63,7 +66,8 @@
 },
 {
   "type": "gui_moverel",
-  "message0": "Move cursor relative to postion %1 x-change %2 y-change %3 duration in seconds %4",
+  "lastDummyAlign0": "RIGHT",
+  "message0": "move cursor relative to position %1 x change %2 y change %3 over %4 seconds",
   "args0": [
     {
       "type": "input_dummy"
@@ -71,20 +75,22 @@
     {
       "type": "input_value",
       "name": "x_change",
-      "check": "Number"
+      "check": "Number",
+      "align": "RIGHT"
     },
     {
       "type": "input_value",
       "name": "y_change",
-      "check": "Number"
+      "check": "Number",
+      "align": "RIGHT"
     },
     {
-      "type": "input_value",
-      "name": "duration_secs",
-      "check": "Number"
+      "type": "field_number",
+      "name": "time_duration",
+      "value": 0
     }
   ],
-  "inputsInline": true,
+  "inputsInline": false,
   "previousStatement": null,
   "nextStatement": null,
   "colour": 210,
@@ -93,7 +99,8 @@
 },
 {
   "type": "gui_dragto",
-  "message0": "Drag cursor to %1 x-position %2 y-position %3 duration in seconds %4",
+  "lastDummyAlign0": "RIGHT",
+  "message0": "drag cursor to %1 x position %2 y position %3 over %4 seconds",
   "args0": [
     {
       "type": "input_dummy"
@@ -101,28 +108,32 @@
     {
       "type": "input_value",
       "name": "x_pos",
-      "check": "Number"
+      "check": "Number",
+      "align": "RIGHT"
     },
     {
       "type": "input_value",
       "name": "y_pos",
-      "check": "Number"
+      "check": "Number",
+      "align": "RIGHT"
     },
     {
-      "type": "input_value",
-      "name": "duration_secs",
-      "check": "Number"
+      "type": "field_number",
+      "name": "time_duration",
+      "value": 0
     }
   ],
-  "inputsInline": true,
-  "output": null,
+  "inputsInline": false,
+  "previousStatement": null,
+  "nextStatement": null,
   "colour": 210,
   "tooltip": "",
   "helpUrl": ""
 },
 {
   "type": "gui_dragrel",
-  "message0": "Drag cursor relative to position %1 x-change %2 y-change %3 duration in seconds %4",
+  "lastDummyAlign0": "RIGHT",
+  "message0": "drag cursor relative to position %1 x change %2 y change %3 over %4 seconds",
   "args0": [
     {
       "type": "input_dummy"
@@ -130,43 +141,45 @@
     {
       "type": "input_value",
       "name": "x_change",
-      "check": "Number"
+      "check": "Number",
+      "align": "RIGHT"
     },
     {
       "type": "input_value",
       "name": "y_change",
-      "check": "Number"
+      "check": "Number",
+      "align": "RIGHT"
     },
     {
-      "type": "input_value",
-      "name": "duration_secs",
-      "check": "Number"
+      "type": "field_number",
+      "name": "time_duration",
+      "value": 0
     }
   ],
-  "inputsInline": true,
+  "inputsInline": false,
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 230,
+  "colour": 210,
   "tooltip": "",
   "helpUrl": ""
 },
 {
   "type": "gui_scroll",
-  "message0": " %1 scroll ammount (+ve srolls up) %2",
+  "message0": " %1 scroll amount (+ve srolls up) %2",
   "args0": [
     {
       "type": "input_dummy"
     },
     {
-      "type": "input_value",
-      "name": "scroll_ammount",
-      "check": "Number"
+      "type": "field_number",
+      "name": "scroll_amount",
+      "value": 0
     }
   ],
   "inputsInline": true,
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 230,
+  "colour": 210,
   "tooltip": "",
   "helpUrl": ""
 },

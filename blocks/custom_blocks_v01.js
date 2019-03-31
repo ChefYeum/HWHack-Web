@@ -1,7 +1,7 @@
 Blockly.Blocks['gui_click'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Click");
+        .appendField("mouse click");
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([["left","left"], ["right","right"], ["centre","centre"]]), "mouse_button");
     this.setInputsInline(true);
@@ -16,17 +16,21 @@ Blockly.Blocks['gui_click'] = {
 Blockly.Blocks['gui_moveto'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Move cursor to");
+        .appendField("move cursor to");
     this.appendValueInput("x_pos")
         .setCheck("Number")
-        .appendField("x");
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("x postion");
     this.appendValueInput("y_pos")
         .setCheck("Number")
-        .appendField("y");
-    this.appendValueInput("duration_secs")
-        .setCheck("Number")
-        .appendField("duration in secs");
-    this.setInputsInline(true);
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("y position");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("over")
+        .appendField(new Blockly.FieldNumber(0), "time_duration")
+        .appendField("seconds");
+    this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(210);
@@ -38,17 +42,21 @@ Blockly.Blocks['gui_moveto'] = {
 Blockly.Blocks['gui_moverel'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Move cursor relative to postion");
+        .appendField("move cursor relative to position");
     this.appendValueInput("x_change")
         .setCheck("Number")
-        .appendField("x-change");
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("x change");
     this.appendValueInput("y_change")
         .setCheck("Number")
-        .appendField("y-change");
-    this.appendValueInput("duration_secs")
-        .setCheck("Number")
-        .appendField("duration in seconds");
-    this.setInputsInline(true);
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("y change");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("over")
+        .appendField(new Blockly.FieldNumber(0), "time_duration")
+        .appendField("seconds");
+    this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(210);
@@ -60,18 +68,23 @@ Blockly.Blocks['gui_moverel'] = {
 Blockly.Blocks['gui_dragto'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Drag cursor to");
+        .appendField("drag cursor to");
     this.appendValueInput("x_pos")
         .setCheck("Number")
-        .appendField("x-position");
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("x position");
     this.appendValueInput("y_pos")
         .setCheck("Number")
-        .appendField("y-position");
-    this.appendValueInput("duration_secs")
-        .setCheck("Number")
-        .appendField("duration in seconds");
-    this.setInputsInline(true);
-    this.setOutput(true, null);
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("y position");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("over")
+        .appendField(new Blockly.FieldNumber(0), "time_duration")
+        .appendField("seconds");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
     this.setColour(210);
  this.setTooltip("");
  this.setHelpUrl("");
@@ -81,20 +94,24 @@ Blockly.Blocks['gui_dragto'] = {
 Blockly.Blocks['gui_dragrel'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Drag cursor relative to position");
+        .appendField("drag cursor relative to position");
     this.appendValueInput("x_change")
         .setCheck("Number")
-        .appendField("x-change");
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("x change");
     this.appendValueInput("y_change")
         .setCheck("Number")
-        .appendField("y-change");
-    this.appendValueInput("duration_secs")
-        .setCheck("Number")
-        .appendField("duration in seconds");
-    this.setInputsInline(true);
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("y change");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("over")
+        .appendField(new Blockly.FieldNumber(0), "time_duration")
+        .appendField("seconds");
+    this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(210);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -104,13 +121,13 @@ Blockly.Blocks['gui_scroll'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("");
-    this.appendValueInput("scroll_ammount")
-        .setCheck("Number")
-        .appendField("scroll ammount (+ve srolls up)");
+    this.appendDummyInput()
+        .appendField("scroll amount (+ve srolls up)")
+        .appendField(new Blockly.FieldNumber(0), "scroll_amount");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(210);
  this.setTooltip("");
  this.setHelpUrl("");
   }
