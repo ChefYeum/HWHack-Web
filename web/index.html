@@ -1,0 +1,73 @@
+<script src="blockly_compressed.js"></script>
+<script src="blocks_compressed.js"></script>
+
+<script src="msg/js/en.js"></script>
+
+ <a id="downloadAnchorElem" style="display:none"></a>
+
+
+<div id="blocklyDiv" style="height: 480px; width: 600px"></div>
+<button onclick="download()">Download</button>
+
+
+
+<xml id="toolbox" style="display: none">
+<!--
+  <block type="controls_if"></block>
+  <block type="controls_repeat_ext"></block>
+  <block type="logic_compare"></block>
+  <block type="math_number"></block>
+  <block type="math_arithmetic"></block>
+  <block type="text"></block>
+  <block type="text_print"></block>
+
+-->
+
+	<category name="TestCategory">
+		<block type="string_length"></block>
+		<block type="command_moveTo"></block>
+		<block type="test"></block>
+	</category>
+
+</xml>
+
+<script>
+	var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')}); 	
+
+	function saveJSON(data, filename){
+			if(!data) {
+				console.error('No data')
+				return;
+			}
+
+			if(!filename) filename = 'console.json'
+
+			if(typeof data === "object"){
+				data = JSON.stringify(data, undefined, 4)
+			}
+
+			var blob = new Blob([data], {type: 'text/json'}),
+				e    = document.createEvent('MouseEvents'),
+				a    = document.createElement('a')
+
+			a.download = filename
+			a.href = window.URL.createObjectURL(blob)
+			a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':')
+			e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+			a.dispatchEvent(e)
+	}
+	
+	function download(){		
+		var mainws = Blockly.getMainWorkspace();
+		var blocks = mainws.getAllBlocks();
+		
+		var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(blocks));
+		var dlAnchorElem = document.getElementById('downloadAnchorElem');
+		dlAnchorElem.setAttribute("href",     dataStr     );
+		dlAnchorElem.setAttribute("download", "scene.json");
+		dlAnchorElem.click();
+	}	
+	
+		
+	
+</script>
