@@ -19,14 +19,12 @@
 
 		<xml id="toolbox" style="display: none">
 			<category name="Mouse">
-				<block type="gui_click"></block>
-				<block type="gui_moverel"></block>
-				<block type="gui_dragto"></block>
-				<block type="gui_dragrel"></block>
-				<block type="gui_scroll"></block>
-				<block type="gui_mousedown"></block>
-				<block type="gui_mouseup"></block>
 				<block type="mouse_moveTo"></block>
+				<block type="mouse_move"></block>
+				<block type="mouse_click"></block>
+				<block type="mouse_scroll"></block>
+				<block type="mouse_dragTo"></block>
+				<block type="mouse_drag"></block>
 			</category>
 		</xml>
 
@@ -48,7 +46,6 @@
 					blockFeats.args = [];
 					for (var j = 0; j < currentBlock.inputList.length; j++){
 						blockFeats.args.push(currentBlock.inputList[j].fieldRow[1].text_);
-						i++;
 					}
 					output.push(blockFeats);
 				}
@@ -65,27 +62,107 @@
 			    downloadAnchorNode.remove();
   			}
 
-
+			Blockly.Blocks['mouse_move'] = {
+			  init: function() {
+				this.jsonInit(
+					{
+					  "type": "mouse_move",
+					  "message0": "Move +x %1   +y %2 over %3 seconds",
+					  "args0": [
+						{
+						  "type": "field_number",
+						  "name": "x_pos",
+						  "value": 0,
+						  "min": 0,
+						  "max": 8196
+						},
+						{
+						  "type": "field_number",
+						  "name": "y_pos",
+						  "value": 0,
+						  "min": 0,
+						  "max": 8196
+						},
+						{
+						  "type": "field_number",
+						  "name": "duration",
+						  "value": 0,
+						  "min": 0,
+						  "max": 8196
+						}
+					  ],
+					  "inputsInline": true,
+					  "previousStatement": null,
+					  "nextStatement": null,
+					  "tooltip": "",
+					  "helpUrl": ""
+					}
+				)
+			  }
+			};
 			Blockly.Blocks['mouse_moveTo'] = {
+			  init: function() {
+				  this.jsonInit(
+					  {
+						  "type": "mouse_move",
+						  "message0": "Move to x: %1   y: %2 over %3 seconds",
+						  "args0": [
+						    {
+						      "type": "field_number",
+						      "name": "x_pos",
+						      "value": 0,
+						      "min": 0,
+						      "max": 8196
+						    },
+						    {
+						      "type": "field_number",
+						      "name": "y_pos",
+						      "value": 0,
+						      "min": 0,
+						      "max": 8196
+						    },
+						    {
+						      "type": "field_number",
+						      "name": "duration",
+						      "value": 0,
+						      "min": 0,
+						      "max": 8196
+						    }
+						  ],
+						  "inputsInline": true,
+						  "previousStatement": null,
+						  "nextStatement": null,
+						  "tooltip": "",
+						  "helpUrl": ""
+					}
+				  )
+			   }
+			};
+			Blockly.Blocks['mouse_click'] = {
 				init: function() {
 					this.jsonInit(
 						{
-						  "type": "moveto",
-						  "message0": "Move cursor to x: %1 %2 y: %3",
+						  "type": "mouse_move",
+						  "message0": "Click  %1",
 						  "args0": [
-							{
-							  "type": "field_input",
-							  "name": "x_pos",
-							  "text": ""
-							},
-							{
-							  "type": "input_dummy"
-							},
-							{
-							  "type": "field_input",
-							  "name": "y_pos",
-							  "text": ""
-							}
+						    {
+						      "type": "field_dropdown",
+						      "name": "NAME",
+						      "options": [
+						        [
+						          "left",
+						          "leftclick"
+						        ],
+						        [
+						          "right",
+						          "rightclick"
+						        ],
+						        [
+						          "centre",
+						          "centreclick"
+						        ]
+						      ]
+						    }
 						  ],
 						  "inputsInline": true,
 						  "previousStatement": null,
@@ -97,170 +174,119 @@
 				}
 			}
 
-			Blockly.Blocks['gui_click'] = {
-			init: function() {
-			  this.appendDummyInput()
-				  .appendField("mouse click");
-			  this.appendDummyInput()
-				  .appendField(new Blockly.FieldDropdown([["left","left"], ["right","right"], ["centre","centre"]]), "mouse_button");
-			  this.setInputsInline(true);
-			  this.setPreviousStatement(true, null);
-			  this.setNextStatement(true, null);
-			  this.setColour(210);
-		   this.setTooltip("");
-		   this.setHelpUrl("");
-			}
-		  };
 
-			Blockly.Blocks['gui_moveto'] = {
+			Blockly.Blocks['mouse_scroll'] = {
 				init: function() {
-				  this.appendDummyInput()
-					  .appendField("move cursor to");
-				  this.appendValueInput("x_pos")
-					  .setCheck("Number")
-					  .setAlign(Blockly.ALIGN_RIGHT)
-					  .appendField("x postion");
-				  this.appendValueInput("y_pos")
-					  .setCheck("Number")
-					  .setAlign(Blockly.ALIGN_RIGHT)
-					  .appendField("y position");
-				  this.appendDummyInput()
-					  .setAlign(Blockly.ALIGN_RIGHT)
-					  .appendField("over")
-					  .appendField(new Blockly.FieldNumber(0), "time_duration")
-					  .appendField("seconds");
-				  this.setInputsInline(false);
-				  this.setPreviousStatement(true, null);
-				  this.setNextStatement(true, null);
-				  this.setColour(210);
-			   this.setTooltip("");
-			   this.setHelpUrl("");
+					this.jsonInit(
+						{
+							"type": "mouse_scroll",
+							"message0": "Scroll %1 for  %2 +ve",
+							"args0": [
+							{
+							  "type": "field_dropdown",
+							  "name": "NAME",
+							  "options": [
+								[
+								  "up",
+								  "up"
+								],
+								[
+								  "down",
+								  "down"
+								],
+								[
+								  "",
+								  ""
+								]
+							  ]
+							},
+							{
+							  "type": "field_number",
+							  "name": "NAME",
+							  "value": 0,
+							  "min": 0,
+							  "max": 8192
+							}
+							],
+							"inputsInline": true,
+							"previousStatement": null,
+							"nextStatement": null,
+							"tooltip": "",
+							"helpUrl": ""
+							}
+						)
+					}
 				}
-			  };
 
-			Blockly.Blocks['gui_moverel'] = {
+			Blockly.Blocks['mouse_drag'] = {
 				init: function() {
-				  this.appendDummyInput()
-					  .appendField("move cursor relative to position");
-				  this.appendValueInput("x_change")
-					  .setCheck("Number")
-					  .setAlign(Blockly.ALIGN_RIGHT)
-					  .appendField("x change");
-				  this.appendValueInput("y_change")
-					  .setCheck("Number")
-					  .setAlign(Blockly.ALIGN_RIGHT)
-					  .appendField("y change");
-				  this.appendDummyInput()
-					  .setAlign(Blockly.ALIGN_RIGHT)
-					  .appendField("over")
-					  .appendField(new Blockly.FieldNumber(0), "time_duration")
-					  .appendField("seconds");
-				  this.setInputsInline(false);
-				  this.setPreviousStatement(true, null);
-				  this.setNextStatement(true, null);
-				  this.setColour(210);
-				this.setTooltip("");
-				this.setHelpUrl("");
+					this.jsonInit(
+							{
+							  "type": "mouse_drag",
+							  "message0": "Drag +x %1 +y %2 over %3 seconds",
+							  "args0": [
+							    {
+							      "type": "field_input",
+							      "name": "x_pos",
+							      "text": "0"
+							    },
+							    {
+							      "type": "field_input",
+							      "name": "y_pos",
+							      "text": "0"
+							    },
+							    {
+							      "type": "field_input",
+							      "name": "duration",
+							      "text": "0"
+							    }
+							  ],
+							  "inputsInline": true,
+							  "previousStatement": null,
+							  "nextStatement": null,
+							  "tooltip": "",
+							  "helpUrl": ""
+							}
+						)
+					}
 				}
-			};
 
-			Blockly.Blocks['gui_dragto'] = {
+			Blockly.Blocks['mouse_dragTo'] = {
 				init: function() {
-				  this.appendDummyInput()
-					  .appendField("drag cursor to");
-				  this.appendValueInput("x_pos")
-					  .setCheck("Number")
-					  .setAlign(Blockly.ALIGN_RIGHT)
-					  .appendField("x position");
-				  this.appendValueInput("y_pos")
-					  .setCheck("Number")
-					  .setAlign(Blockly.ALIGN_RIGHT)
-					  .appendField("y position");
-				  this.appendDummyInput()
-					  .setAlign(Blockly.ALIGN_RIGHT)
-					  .appendField("over")
-					  .appendField(new Blockly.FieldNumber(0), "time_duration")
-					  .appendField("seconds");
-				  this.setInputsInline(false);
-				  this.setPreviousStatement(true, null);
-				  this.setNextStatement(true, null);
-				  this.setColour(210);
-				this.setTooltip("");
-				this.setHelpUrl("");
+					this.jsonInit(
+							{
+							"type": "mouse_dragto",
+							"message0": "Drag to x: %1 y: %2 over %3 seconds",
+							"args0": [
+							{
+							  "type": "field_input",
+							  "name": "x_pos",
+							  "text": "0"
+							},
+							{
+							  "type": "field_input",
+							  "name": "y_pos",
+							  "text": "0"
+							},
+							{
+							  "type": "field_input",
+							  "name": "duration",
+							  "text": "0"
+							}
+							],
+							"inputsInline": true,
+							"previousStatement": null,
+							"nextStatement": null,
+							"tooltip": "",
+							"helpUrl": ""
+							}
+						)
+					}
 				}
-			};
 
-			Blockly.Blocks['gui_dragrel'] = {
-				init: function() {
-				  this.appendDummyInput()
-					  .appendField("drag cursor relative to position");
-				  this.appendValueInput("x_change")
-					  .setCheck("Number")
-					  .setAlign(Blockly.ALIGN_RIGHT)
-					  .appendField("x change");
-				  this.appendValueInput("y_change")
-					  .setCheck("Number")
-					  .setAlign(Blockly.ALIGN_RIGHT)
-					  .appendField("y change");
-				  this.appendDummyInput()
-					  .setAlign(Blockly.ALIGN_RIGHT)
-					  .appendField("over")
-					  .appendField(new Blockly.FieldNumber(0), "time_duration")
-					  .appendField("seconds");
-				  this.setInputsInline(false);
-				  this.setPreviousStatement(true, null);
-				  this.setNextStatement(true, null);
-				  this.setColour(210);
-				this.setTooltip("");
-				this.setHelpUrl("");
-				}
-			};
 
-			Blockly.Blocks['gui_scroll'] = {
-				init: function() {
-				  this.appendDummyInput()
-					  .appendField("");
-				  this.appendDummyInput()
-					  .appendField("scroll amount (+ve srolls up)")
-					  .appendField(new Blockly.FieldNumber(0), "scroll_amount");
-				  this.setInputsInline(true);
-				  this.setPreviousStatement(true, null);
-				  this.setNextStatement(true, null);
-				  this.setColour(210);
-				this.setTooltip("");
-				this.setHelpUrl("");
-				}
-			};
 
-			Blockly.Blocks['gui_mousedown'] = {
-				init: function() {
-				  this.appendDummyInput()
-					  .appendField("Mouse down");
-				  this.appendDummyInput()
-					  .appendField(new Blockly.FieldDropdown([["left","left"], ["right","right"], ["centre","centre"]]), "mouse_button");
-				  this.setInputsInline(true);
-				  this.setPreviousStatement(true, null);
-				  this.setNextStatement(true, null);
-				  this.setColour(210);
-				this.setTooltip("");
-				this.setHelpUrl("");
-				}
-			};
 
-			Blockly.Blocks['gui_mouseup'] = {
-				init: function() {
-				  this.appendDummyInput()
-					  .appendField("Mouse up");
-				  this.appendDummyInput()
-					  .appendField(new Blockly.FieldDropdown([["left","left"], ["right","right"], ["centre","centre"]]), "mouse_button");
-				  this.setInputsInline(true);
-				  this.setPreviousStatement(true);
-				  this.setNextStatement(true);
-				  this.setColour(210);
-				this.setTooltip("");
-				this.setHelpUrl("");
-				}
-			};
 
 		</script>
 	</body>
