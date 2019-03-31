@@ -41,3 +41,12 @@ with open('output.json') as json_file:
                 dur = int(args[2])
                 print("Dragging mouse relatively by (" + str(x) + ", " + str(y) + ") over " + str(dur) + " seconds" )
                 pyautogui.drag(x, y, dur, button='left')
+            elif type == "keyboard_typewrite":
+                inv = float(args[1])
+                print("Typewriting " + args[0] + " with " + str(inv) + " delay between each character")
+                pyautogui.typewrite(args[0], interval=inv)
+            elif type == "keyboard_press":
+                print("Pressing " + args[0])
+                pyautogui.press(args[0])
+
+
