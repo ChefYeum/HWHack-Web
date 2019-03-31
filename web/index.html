@@ -28,9 +28,6 @@
 				<block type="gui_mouseup"></block>
 				<block type="mouse_moveTo"></block>
 			</category>
-			<category name="Number">
-				<block type="math_number"></block>
-			</category>
 		</xml>
 
 		<script>
@@ -45,47 +42,60 @@
 				var blocks = ws.getAllBlocks();
 				var output = [];
 				for (var i = 0; i < blocks.length; i++){
-					output.push(blockToObj(blocks[i]));
+					var blockFeats = {};
+					var currentBlock = blocks[i];
+					blockFeats.type = currentBlock.type;
+					blockFeats.args = [];
+					for (var j = 0; j < currentBlock.inputList.length; j++){
+						blockFeats.args.push(currentBlock.inputList[j].fieldRow[1].text_);
+						i++;
+					}
+					output.push(blockFeats);
 				}
-				console.log(output);
+				downloadObjectAsJson(output,"output");
 			}
-			
-			function blockToObj(b){
-				var output = {};
-				output.type = b.type;
-				output.args = [];
-				for (var j = 0; j < b.inputList.length; j++){
-					output.args.push(b.inputList[j].fieldRow[0].text_);
-				}
-				return output;
-			}
-		
+
+			function downloadObjectAsJson(exportObj, exportName){
+			    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+			    var downloadAnchorNode = document.createElement('a');
+			    downloadAnchorNode.setAttribute("href",     dataStr);
+			    downloadAnchorNode.setAttribute("download", exportName + ".json");
+			    document.body.appendChild(downloadAnchorNode); // required for firefox
+			    downloadAnchorNode.click();
+			    downloadAnchorNode.remove();
+  			}
+
+
 			Blockly.Blocks['mouse_moveTo'] = {
 				init: function() {
 					this.jsonInit(
+						{
+						  "type": "moveto",
+						  "message0": "Move cursor to x: %1 %2 y: %3",
+						  "args0": [
 							{
-								"type": "moveto",
-								"message0": "move cursor to x: %1 , y: %2",
-								"args0": [
-									{
-									  "type": "input_value",
-									  "name": "x",
-									  "check": "Number"
-									},
-									{
-									  "type": "input_value",
-									  "name": "y",
-									  "check": "Number"
-									}
-								],
-								"inputsInline": true,
-								"nextStatement": null,
-								"tooltip": "",
-								"helpUrl": ""
+							  "type": "field_input",
+							  "name": "x_pos",
+							  "text": ""
+							},
+							{
+							  "type": "input_dummy"
+							},
+							{
+							  "type": "field_input",
+							  "name": "y_pos",
+							  "text": ""
 							}
+						  ],
+						  "inputsInline": true,
+						  "previousStatement": null,
+						  "nextStatement": null,
+						  "tooltip": "",
+						  "helpUrl": ""
+						}
 					)
 				}
-			}	
+			}
 
 			Blockly.Blocks['gui_click'] = {
 			init: function() {
