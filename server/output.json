@@ -1,2 +1,1 @@
-[{"type":"mouse_moveTo","args":["100","200","3"]},{"type":"mouse_move","args":["40","50","6"]},{"type":"mouse_click","args":["right"]},{"type":"mouse_scroll","args":["down","20"]},{"type":"mouse_dragTo","args":["30","20","10"]},{"type":"mouse_drag","args":["300","200","10"]}]
-
+[{"type":"mouse_moveTo","args":["100","200","3"]},{"type":"mouse_move","args":["40","50","6"]},{"type":"mouse_click","args":["right"]},{"type":"mouse_scroll","args":["down","20"]},{"type":"mouse_dragTo","args":["30","20","10"]},{"type":"mouse_drag","args":["300","200","10"]},{"type":"keyboard_typewrite","args":["how much wood would a woodchuck chuck","0.25"]},{"type":"keyboard_press","args":["space"]}]
