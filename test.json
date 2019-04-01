@@ -1,1 +1,0 @@
-[{"type":"mouse_moveTo","args":["100"]},{"type":"mouse_move","args":["400"]},{"type":"mouse_click","args":["left"]},{"type":"mouse_scroll","args":["down"]},{"type":"mouse_dragTo","args":["700"]},{"type":"mouse_drag","args":["900"]}]
