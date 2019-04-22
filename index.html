@@ -12,8 +12,10 @@
 		<a id="downloadAnchorElem" style="display:none"></a>
 
 		<center>
-		<div id="blocklyDiv" style="height: 768px; width: 1024px"></div>
-		<button onclick="download()" style="height: 80px; width: 400px">Download</button>
+			<div id="blocklyDiv" style="height: 768px; width: 1024px"></div>
+			<button onclick="download()" style="height: 80px; width: 400px">Download</button>
+			<button onclick="getXML()" style="height: 80px; width: 400px">Get XML</button>
+
 		</center>
 
 
@@ -32,6 +34,13 @@
 
 		<script>
 			var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
+
+			function getXML(){
+				var mainws = Blockly.getMainWorkspace();
+				var blocks = mainws.getAllBlocks()
+				console.log(Blockly.Xml.blockToDom(blocks));
+			}
+
 
 			function download(){
 				var mainws = Blockly.getMainWorkspace();
