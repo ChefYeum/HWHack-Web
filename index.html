@@ -1,6 +1,17 @@
 <!DOCTYPE HTML>
 	<head>
-		<meta charset="utf8" name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf8">
+		<style>
+			html, body {
+			  height: 100%;
+			  margin: 1%;
+			}
+			#blocklyArea {
+			  height: 90%;
+			  background:black; 
+			  text-align: center;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -11,8 +22,9 @@
 
 		<a id="downloadAnchorElem" style="display:none"></a>
 
+			
 		<div id="blocklyArea"></div>
-		<div id="blocklyDiv" style="position: absolute">text</div>
+		<div id="blocklyDiv" style="position: absolute"></div>
 
 		<xml id="toolbox" style="display: none">
 			<category name="Pallette">
@@ -31,7 +43,7 @@
 		<br>
 
 		<div style="text-align: center;" >
-			<button onclick="getXML()" style="height: 80px; width: 400px">Get XML</button>
+			<button onclick="getXML()" style="height: 40px; width: 200px">Get XML</button>
 		</div>
 
 		<script>
