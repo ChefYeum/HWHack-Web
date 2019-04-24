@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 	<head>
-		<meta charset="utf8">
+		<meta charset="utf8" name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 
 	<body>
@@ -11,13 +11,8 @@
 
 		<a id="downloadAnchorElem" style="display:none"></a>
 
-		<center>
-			<div id="blocklyDiv" style="height: 768px; width: 1024px"></div>
-			<button onclick="download()" style="height: 80px; width: 400px">Download</button>
-			<button onclick="getXML()" style="height: 80px; width: 400px">Get XML</button>
-
-		</center>
-
+		<div id="blocklyArea"></div>
+		<div id="blocklyDiv" style="position: absolute">text</div>
 
 		<xml id="toolbox" style="display: none">
 			<category name="Pallette">
@@ -32,52 +27,22 @@
 			</category>
 		</xml>
 
+
+		<br>
+
+		<div style="text-align: center;" >
+			<button onclick="getXML()" style="height: 80px; width: 400px">Get XML</button>
+		</div>
+
 		<script>
-			var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
 
 			function getXML(){
-				var mainws = Blockly.getMainWorkspace();
-				var blocks = mainws.getAllBlocks()
-				console.log(Blockly.Xml.blockToDom(blocks));
+				var blocks = Blockly.getMainWorkspace().getAllBlocks(ordered=true);
+				console.log(blocks)
+				blocks.forEach(function(block){
+					console.log(Blockly.Xml.domToPrettyText(Blockly.Xml.blockToDom(block)));
+				})
 			}
-
-
-			function download(){
-				var mainws = Blockly.getMainWorkspace();
-				wsToJSON(mainws);
-			}
-
-			function wsToJSON(ws){
-				var blocks = ws.getAllBlocks();
-				var output = [];
-				for (var i = 0; i < blocks.length; i++){
-					var blockFeats = {};
-					var currentBlock = blocks[i];
-					blockFeats.type = currentBlock.type;
-					blockFeats.args = [];
-					for (var j = 0; j < currentBlock.inputList[0].fieldRow.length; j++){
-						currentField = currentBlock.inputList[0].fieldRow[j];
-						if ((currentField.name != undefined)){
-							blockFeats.args.push(currentField.text_);
-						}
-					}
-					output.push(blockFeats);
-				}
-				downloadObjectAsJson(output,"output");
-			}
-
-			function downloadObjectAsJson(exportObj, exportName){
-			    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
-			    var downloadAnchorNode = document.createElement('a');
-			    downloadAnchorNode.setAttribute("href",     dataStr);
-			    downloadAnchorNode.setAttribute("download", exportName + ".json");
-			    document.body.appendChild(downloadAnchorNode); // required for firefox
-			    downloadAnchorNode.click();
-			    downloadAnchorNode.remove();
-  			}
-
-
-
 
 			Blockly.Blocks['mouse_move'] = {
 			  init: function() {
@@ -296,7 +261,6 @@
 						)
 					}
 				}
-
 			Blockly.Blocks['keyboard_typewrite'] = {
 				  init: function() {
 					this.jsonInit(
@@ -324,7 +288,6 @@
 					)
 				  }
 				};
-
 			Blockly.Blocks['keyboard_press'] = {
 				  init: function() {
 					this.jsonInit(
@@ -348,6 +311,32 @@
 				  }
 				};
 
+
+			//Responsive Script
+			var blocklyArea = document.getElementById('blocklyArea');
+			var blocklyDiv = document.getElementById('blocklyDiv');
+			var workspace = Blockly.inject(blocklyDiv,
+					{toolbox: document.getElementById('toolbox')});
+			var onresize = function(e) {
+				// Compute the absolute coordinates and dimensions of blocklyArea.
+				var element = blocklyArea;
+				var x = 0;
+				var y = 0;
+				do {
+					x += element.offsetLeft;
+					y += element.offsetTop;
+					element = element.offsetParent;
+				} while (element);
+				// Position blocklyDiv over blocklyArea.
+				blocklyDiv.style.left = x + 'px';
+				blocklyDiv.style.top = y + 'px';
+				blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+				blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+				Blockly.svgResize(workspace);
+			};
+			window.addEventListener('resize', onresize, false);
+			onresize();
+			Blockly.svgResize(workspace);
 
 
 		</script>
