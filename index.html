@@ -7,7 +7,7 @@
 			  margin: 1%;
 			}
 			#blocklyArea {
-			  height: 90%;
+			  height: 50%;
 			  background:black; 
 			  text-align: center;
 			}
@@ -15,17 +15,21 @@
 	</head>
 
 	<body>
-		<script src="blockly_compressed.js"></script>
-		<script src="blocks_compressed.js"></script>
+		<script src="src/blockly_compressed.js"></script>
+		<script src="src/blocks_compressed.js"></script>
 
-		<script src="msg/js/en.js"></script>
+		<script src="src/msg/js/en.js"></script>
 
 		<a id="downloadAnchorElem" style="display:none"></a>
 
 			
 		<div id="blocklyArea">
-		<div id="blocklyDiv" style="position:static"></div> 
+			<div id="blocklyDiv" style="position:static"></div> 
+			<div> what </div>
 		</div>
+
+		<div style="height: 50%"> what </div>
+
 		<xml id="toolbox" style="display: none">
 			<category name="Pallette">
 				<block type="mouse_moveTo"></block>
