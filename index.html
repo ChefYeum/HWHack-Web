@@ -18,17 +18,24 @@
 		<script src="src/blockly_compressed.js"></script>
 		<script src="src/blocks_compressed.js"></script>
 
+
+		<!-- Google code-prettify added -->
+		<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
 		<script src="src/msg/js/en.js"></script>
 
 		<a id="downloadAnchorElem" style="display:none"></a>
-
 			
 		<div id="blocklyArea">
 			<div id="blocklyDiv" style="position:static"></div> 
-			<div> what </div>
 		</div>
 
-		<div style="height: 50%"> what </div>
+		
+
+
+		<pre class="prettyprint">
+			
+		</pre>
 
 		<xml id="toolbox" style="display: none">
 			<category name="Pallette">
@@ -48,6 +55,7 @@
 		</div>
 
 		<script>
+
 
 			function getXML(){
 				var blocks = Blockly.getMainWorkspace().getAllBlocks(ordered=true);
